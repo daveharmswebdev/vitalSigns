@@ -11,7 +11,7 @@ let gutil = require('gulp-util');
 let sourcemaps = require('gulp-sourcemaps');
 let jadeify = require('jadeify');
 let jasmine = require('gulp-jasmine');
-let jasmineReporter = require('jasmine-reporters');
+let jasmineSpecReporter = require('jasmine-spec-reporter');
 
 let handleError = function(task) {
   return function(err) {
@@ -76,9 +76,12 @@ gulp.task('lint', function() {
 
 gulp.task('specs', function() {
   return gulp.src('./src/specs/*.js')
-    .pipe(jasmine(jasmine({
-      reporter: new jasmineReporter.JUnitXmlReporter()
-    })));
+    .pipe(jasmine({
+        reporter: new jasmineSpecReporter({
+        displayFailuresSummary: false,
+        }),
+        errorOnFail: false,
+    }));
 });
 
 /*

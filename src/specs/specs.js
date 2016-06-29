@@ -3,6 +3,7 @@
 var Person = require('../person.js');
 var getAge = require('../getAge.js');
 var Patient = require('../patient.js');
+var BloodSugar = require('../bloodSugar.js');
 
 describe('specs for patient.js', function() {
 
@@ -17,6 +18,21 @@ describe('specs for patient.js', function() {
 
 	it('getDemographics should return age and gender', function() {
 		expect(testPatient.getDemographics()).toBe('43 male');
+	});
+
+	it('will hold bloodsugars in an array', function() {
+		let testBS = new BloodSugar(150);
+		let testBS2 = new BloodSugar(155);
+		testPatient.setBloodSugar(testBS);
+		testPatient.setBloodSugar(testBS2);
+		expect(testPatient.bloodSugars[0].score).toEqual(150);
+		expect(testPatient.bloodSugars[1]).toEqual(jasmine.objectContaining({
+			score: 155
+		}));
+	});
+
+	it('set insulinAmin will call insulinAdmin constructor', function() {
+
 	});
 
 });
